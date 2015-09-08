@@ -28,7 +28,9 @@ loop do
   current_minute = time.strftime("%H:%M")
   previous_minute = (time - 60).strftime("%H:%M")
   time_request = "\"#{current_minute}\" OR \"#{previous_minute}\""
-  twi.search(time_request, lang: 'ru', result_type: 'recent', count: '10').take(10).each do |tw|
+  begin
+    twi_search = twi.search(time_request, lang: 'ru', result_type: 'recent', count: '10').take(10)
+  twi_search.each do |tw|
     puts "#{tw.created_at}: #{tw.text}"
     next if stopaccs.map{|sacc| tw.user.screen_name == sacc}.any?
     next if stopwords.map{|sw| UnicodeUtils.downcase(tw.text).include? UnicodeUtils.downcase(sw)}.any?
@@ -43,12 +45,16 @@ loop do
         begin  
           twi.retweet(tw)
           break
-        rescue Exception => e  
+        rescue Exception => e 
           puts e.message  
           puts e.backtrace.inspect  
         end  
       end
     end
   end
+  rescue Exception => e 
+    puts e.message  
+    puts e.backtrace.inspect  
+  end  
   sleep 15
 end
