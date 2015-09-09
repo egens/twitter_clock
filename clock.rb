@@ -43,7 +43,11 @@ loop do
     if Time.now - tw.created_at < 120 
       if tw.text.include? current_minute or tw.text.include? previous_minute
         begin  
-          twi.retweet(tw)
+          if tw.media?
+  	    twi.retweet(tw)
+          else
+            twi.favorite(tw)
+	  end
           break
         rescue Exception => e 
           puts e.message  
