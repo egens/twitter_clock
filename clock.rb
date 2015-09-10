@@ -19,7 +19,7 @@ stopwords = ["#смотри", "#видео", "Мои твиты:", "Телепр
 	"ахуенно", "пиздую", "пиздуй", "блять", "ебал", "brent", 
 	"нахуй"]
 stopaccs = ["Kremlin_Watch", "ROIpoll", "Weather_SPB", "sergey_vorona", 
-	"flymobimir", "tochnoe_vremya", "TupikovaHome"]
+	"flymobimir", "tochnoe_vremya", "TupikovaHome", "Max_bratishka"]
 
 loop do
   time = Time.now
