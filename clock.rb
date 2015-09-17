@@ -46,7 +46,7 @@ loop do
           if tw.media?
   	    twi.retweet(tw)
           else
-            twi.favorite(tw)
+#            twi.favorite(tw)
 	  end
           break
         rescue Exception => e 
